@@ -8,6 +8,7 @@ module advent.of.code.java {
     requires com.fasterxml.jackson.databind;
     requires org.jsoup;
     requires java.logging;
+    requires java.net.http;
     provides IModeExecutor with InitExecutor,
             SubmitExecutor,
             TestSolutionExecutor;

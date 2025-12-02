@@ -1,69 +1,57 @@
 package http;
 
+import config.Configuration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import config.Configuration;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
-import java.util.ArrayList;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Properties;
-import java.util.Scanner;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 public class AocClient {
 
     private static final Logger LOG = Logger.getLogger(AocClient.class.getName());
-    
+
     public List<String> getInput(int year, int day) {
-        try {
+        try (HttpClient client = HttpClient.newHttpClient()) {
             Properties props = Configuration.getProperties();
             String sessionKey = props.getProperty("session.key");
             String userAgent = props.getProperty("user.agent");
-            URL url = URI.create(String.format("https://adventofcode.com/%d/day/%d/input", year, day)).toURL();
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-            connection.setRequestProperty("Cookie", String.format("session=%s", sessionKey));
-            connection.setRequestProperty("User-Agent", userAgent);
-            InputStream inputStream = connection.getInputStream();
-            Scanner scanner = new Scanner(inputStream);
-            List<String> input = new ArrayList<>();
-            while (scanner.hasNextLine()) {
-                input.add(scanner.nextLine());
-            }
-            return input;
-        } catch (IOException e) {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(String.format("https://adventofcode.com/%d/day/%d/input", year, day)))
+                    .header("Cookie", String.format("session=%s", sessionKey))
+                    .header("User-Agent", userAgent)
+                    .build();
+            HttpResponse<Stream<String>> response = client.send(request, HttpResponse.BodyHandlers.ofLines());
+            return response.body().toList();
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public AocSubmitResult submitAnswer(int year, int day, int part, String answer) {
-        try {
+    public AocSubmitResult submitAnswer(int year, int day, int level, String answer) {
+        try (HttpClient client = HttpClient.newHttpClient()) {
             Properties props = Configuration.getProperties();
             String sessionKey = props.getProperty("session.key");
             String userAgent = props.getProperty("user.agent");
-            URL url = URI.create(String.format("https://adventofcode.com/%d/day/%d/answer", year, day)).toURL();
-            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Cookie", String.format("session=%s", sessionKey));
-            connection.setRequestProperty("User-Agent", userAgent);
-            connection.setDoOutput(true);
-            connection.getOutputStream().write(String.format("level=%d&answer=%s", part, answer).getBytes());
-            InputStream inputStream = connection.getInputStream();
-            ByteArrayOutputStream response = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            for (int length; (length = inputStream.read(buffer)) != -1; ) {
-                response.write(buffer, 0, length);
-            }
-            Document document = Jsoup.parse(response.toString());
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(String.format("https://adventofcode.com/%d/day/%d/answer", year, day)))
+                    .header("Cookie", String.format("session=%s", sessionKey))
+                    .header("User-Agent", userAgent)
+                    .POST(HttpRequest.BodyPublishers.ofString(String.format("level=%d&answer=%s", level, answer)))
+                    .build();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            Document document = Jsoup.parse(response.body());
             String responseMsg = document.getElementsByTag("article").text();
-            LOG.info(String.format("Part %d%nAnswer: %s%nResponse: %s", part, answer, responseMsg));
+            LOG.info(String.format("Level %d%nAnswer: %s%nResponse: %s", level, answer, responseMsg));
             return new AocSubmitResult(answer, responseMsg);
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
