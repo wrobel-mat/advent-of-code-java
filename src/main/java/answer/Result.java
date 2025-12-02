@@ -27,6 +27,10 @@ public class Result {
         return !answers.get(partNum).isCompleted();
     }
 
+    public int year() {
+        return year;
+    }
+
     public int day() {
         return day;
     }
@@ -37,6 +41,6 @@ public class Result {
 
     @Override
     public String toString() {
-        return STR."year: \{year}, day: \{day}\nanswers: \{answers.values()}";
+        return String.format("year: %d, day: %d%n  answers: %s", year, day, answers.values());
     }
 }

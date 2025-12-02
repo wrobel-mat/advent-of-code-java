@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="submit-answer" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="exec.AdventOfCodeRunner" />
-    <module name="advent-of-code-2021" />
+    <module name="advent-of-code-java" />
     <option name="PROGRAM_PARAMETERS" value="submit" />
     <method v="2">
       <option name="Make" enabled="true" />

@@ -3,7 +3,7 @@ import exec.mode.InitExecutor;
 import exec.mode.SubmitExecutor;
 import exec.mode.TestSolutionExecutor;
 
-module advent.of.code {
+module advent.of.code.java {
     uses IModeExecutor;
     requires com.fasterxml.jackson.databind;
     requires org.jsoup;

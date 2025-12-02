@@ -1,4 +1,4 @@
-package solution.day${dayNum};
+package solution.y${yearNum}.d${dayNum};
 
 import solution.ISolution;
 

@@ -31,6 +31,6 @@ class Answer {
 
     @Override
     public String toString() {
-        return STR."{part: \{part}, answer: '\{answer}', status: \{status}}";
+        return String.format("{part: %d, answer: '%s', status: %s}", part, answer, status);
     }
 }

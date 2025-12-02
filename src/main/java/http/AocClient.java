@@ -25,9 +25,9 @@ public class AocClient {
             Properties props = Configuration.getProperties();
             String sessionKey = props.getProperty("session.key");
             String userAgent = props.getProperty("user.agent");
-            URL url = URI.create(STR."https://adventofcode.com/\{year}/day/\{day}/input").toURL();
+            URL url = URI.create(String.format("https://adventofcode.com/%d/day/%d/input", year, day)).toURL();
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-            connection.setRequestProperty("Cookie", STR."session=\{sessionKey}");
+            connection.setRequestProperty("Cookie", String.format("session=%s", sessionKey));
             connection.setRequestProperty("User-Agent", userAgent);
             InputStream inputStream = connection.getInputStream();
             Scanner scanner = new Scanner(inputStream);
@@ -46,13 +46,13 @@ public class AocClient {
             Properties props = Configuration.getProperties();
             String sessionKey = props.getProperty("session.key");
             String userAgent = props.getProperty("user.agent");
-            URL url = URI.create(STR."https://adventofcode.com/\{year}/day/\{day}/answer").toURL();
+            URL url = URI.create(String.format("https://adventofcode.com/%d/day/%d/answer", year, day)).toURL();
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("Cookie", STR."session=\{sessionKey}");
+            connection.setRequestProperty("Cookie", String.format("session=%s", sessionKey));
             connection.setRequestProperty("User-Agent", userAgent);
             connection.setDoOutput(true);
-            connection.getOutputStream().write(STR."level=\{part}&answer=\{answer}".getBytes());
+            connection.getOutputStream().write(String.format("level=%d&answer=%s", part, answer).getBytes());
             InputStream inputStream = connection.getInputStream();
             ByteArrayOutputStream response = new ByteArrayOutputStream();
             byte[] buffer = new byte[1024];
@@ -61,7 +61,7 @@ public class AocClient {
             }
             Document document = Jsoup.parse(response.toString());
             String responseMsg = document.getElementsByTag("article").text();
-            LOG.info(STR."Part \{part}\nAnswer: \{answer}\nResponse: \{responseMsg}");
+            LOG.info(String.format("Part %d%nAnswer: %s%nResponse: %s", part, answer, responseMsg));
             return new AocSubmitResult(answer, responseMsg);
         } catch (IOException e) {
             throw new RuntimeException(e);
