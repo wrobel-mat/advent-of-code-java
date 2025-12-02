@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 public class Solution implements ISolution {
 
     @Override
-    public Optional<String> solvePartOne(List<String> input) {
+    public Optional<String> solveLevelOne(List<String> input) {
         VentMap ventMap = new VentMap(input);
         Predicate<VentLine> horizontalVents = VentLine::isHorizontal;
         Predicate<VentLine> verticalVents = VentLine::isVertical;
@@ -18,7 +18,7 @@ public class Solution implements ISolution {
     }
 
     @Override
-    public Optional<String> solvePartTwo(List<String> input) {
+    public Optional<String> solveLevelTwo(List<String> input) {
         VentMap ventMap = new VentMap(input);
         Predicate<VentLine> allVents = _ -> true;
         long overlapCount = ventMap.countOverlappingVentPoints(allVents);

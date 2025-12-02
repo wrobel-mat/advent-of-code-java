@@ -13,18 +13,18 @@ public class Result {
         Result result = new Result();
         result.year = year;
         result.day = day;
-        result.answers = new TreeMap<>(Map.of(1, Answer.forPart(1), 2, Answer.forPart(2)));
+        result.answers = new TreeMap<>(Map.of(1, Answer.forLevel(1), 2, Answer.forLevel(2)));
         return result;
     }
 
-    public void completePart(int partNum, String answer) {
-        Answer currentAnswer = answers.get(partNum);
+    public void completeLevel(int level, String answer) {
+        Answer currentAnswer = answers.get(level);
         currentAnswer.setCompleted();
         currentAnswer.setAnswer(answer);
     }
 
-    public boolean partNotCompleted(int partNum) {
-        return !answers.get(partNum).isCompleted();
+    public boolean levelNotCompleted(int level) {
+        return !answers.get(level).isCompleted();
     }
 
     public int year() {
@@ -35,7 +35,7 @@ public class Result {
         return day;
     }
 
-    public boolean bothPartsCompleted() {
+    public boolean bothLevelsCompleted() {
         return answers.values().stream().allMatch(Answer::isCompleted);
     }
 

@@ -28,13 +28,13 @@ public class TestSolutionExecutor implements IModeExecutor {
                 });
 
         final ISolution solution = SolutionProvider.getSolution(year, day);
-        solution.solvePartOne(input)
+        solution.solveLevelOne(input)
                 .ifPresentOrElse(
-                        answer -> System.out.printf("Part 1 answer: %s%n", answer),
-                        () -> System.out.println("No answer for part 1"));
-        solution.solvePartTwo(input)
+                        answer -> System.out.printf("Level 1 answer: %s%n", answer),
+                        () -> System.out.println("No answer for level 1"));
+        solution.solveLevelTwo(input)
                 .ifPresentOrElse(
-                        answer -> System.out.printf("Part 2 answer: %s%n", answer),
-                        () -> System.out.println("No answer for part 2"));
+                        answer -> System.out.printf("Level 2 answer: %s%n", answer),
+                        () -> System.out.println("No answer for level 2"));
     }
 }

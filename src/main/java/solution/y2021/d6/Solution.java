@@ -8,14 +8,14 @@ import java.util.Optional;
 public class Solution implements ISolution {
 
     @Override
-    public Optional<String> solvePartOne(List<String> input) {
+    public Optional<String> solveLevelOne(List<String> input) {
         LanternFishSpawnSimulation simulation = new LanternFishSpawnSimulation(input.getFirst());
         long populationCount = simulation.simulateSpawn(80).countPopulation();
         return Optional.of(String.valueOf(populationCount));
     }
 
     @Override
-    public Optional<String> solvePartTwo(List<String> input) {
+    public Optional<String> solveLevelTwo(List<String> input) {
         LanternFishSpawnSimulation simulation = new LanternFishSpawnSimulation(input.getFirst());
         long populationCount = simulation.simulateSpawn(256).countPopulation();
         return Optional.of(String.valueOf(populationCount));

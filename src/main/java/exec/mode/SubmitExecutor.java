@@ -22,7 +22,7 @@ public class SubmitExecutor implements IModeExecutor {
         final int year = Configuration.getYear();
         final int day = Configuration.getDay();
         final Result result = LocalCache.getResult(year, day);
-        if (result.bothPartsCompleted()) {
+        if (result.bothLevelsCompleted()) {
             printResult(result);
             System.exit(0);
         }
@@ -36,17 +36,17 @@ public class SubmitExecutor implements IModeExecutor {
                 });
 
         final ISolution solution = SolutionProvider.getSolution(year, day);
-        if (result.partNotCompleted(1)) {
-            solution.solvePartOne(input)
+        if (result.levelNotCompleted(1)) {
+            solution.solveLevelOne(input)
                     .map(answer -> aocClient.submitAnswer(year, day, 1, answer))
                     .filter(AocSubmitResult::isCorrectAnswer)
-                    .ifPresent(submitResult -> result.completePart(1, submitResult.submittedAnswer()));
+                    .ifPresent(submitResult -> result.completeLevel(1, submitResult.submittedAnswer()));
         }
-        if (result.partNotCompleted(2)) {
-            solution.solvePartTwo(input)
+        if (result.levelNotCompleted(2)) {
+            solution.solveLevelTwo(input)
                     .map(answer -> aocClient.submitAnswer(year, day, 2, answer))
                     .filter(AocSubmitResult::isCorrectAnswer)
-                    .ifPresent(submitResult -> result.completePart(2, submitResult.submittedAnswer()));
+                    .ifPresent(submitResult -> result.completeLevel(2, submitResult.submittedAnswer()));
         }
 
         printResult(result);

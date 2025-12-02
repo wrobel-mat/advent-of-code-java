@@ -14,7 +14,7 @@ import static solution.y2021.d12.CaveTraversalRules.CavesPerPathLimit.ONE_CAVE_P
 public class Solution implements ISolution {
 
     @Override
-    public Optional<String> solvePartOne(List<String> input) {
+    public Optional<String> solveLevelOne(List<String> input) {
         CaveMap caveMap = new CaveMap(input);
         CaveTraversalRules traversalRules =
                 new CaveTraversalRules.Builder()
@@ -31,7 +31,7 @@ public class Solution implements ISolution {
     }
 
     @Override
-    public Optional<String> solvePartTwo(List<String> input) {
+    public Optional<String> solveLevelTwo(List<String> input) {
         CaveMap caveMap = new CaveMap(input);
         CaveTraversalRules traversalRules =
                 new CaveTraversalRules.Builder()

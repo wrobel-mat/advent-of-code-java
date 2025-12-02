@@ -8,7 +8,7 @@ import java.util.Optional;
 public class Solution implements ISolution {
 
     @Override
-    public Optional<String> solvePartOne(List<String> input) {
+    public Optional<String> solveLevelOne(List<String> input) {
         SubmarineCoursePlan coursePlan = new SubmarineCoursePlan(input);
         INavigationHandlerFactory navigationHandlerFactory = new SimpleHandlerFactory();
         Submarine submarine = new Submarine(navigationHandlerFactory);
@@ -18,7 +18,7 @@ public class Solution implements ISolution {
     }
 
     @Override
-    public Optional<String> solvePartTwo(List<String> input) {
+    public Optional<String> solveLevelTwo(List<String> input) {
         SubmarineCoursePlan coursePlan = new SubmarineCoursePlan(input);
         INavigationHandlerFactory navigationHandlerFactory = new ComplicatedHandlerFactory();
         Submarine submarine = new Submarine(navigationHandlerFactory);

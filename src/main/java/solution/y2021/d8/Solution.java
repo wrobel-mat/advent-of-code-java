@@ -8,14 +8,14 @@ import java.util.Optional;
 public class Solution implements ISolution {
     
     @Override
-    public Optional<String> solvePartOne(List<String> input) {
+    public Optional<String> solveLevelOne(List<String> input) {
         DisplaysReport displaysReport = new DisplaysReport(input);
         long answer = displaysReport.countEasyDigits();
         return Optional.of(String.valueOf(answer));
     }
 
     @Override
-    public Optional<String> solvePartTwo(List<String> input) {
+    public Optional<String> solveLevelTwo(List<String> input) {
         DisplaysReport displaysReport = new DisplaysReport(input);
         long answer = displaysReport.decodeAndSumOutputValues();
         return Optional.of(String.valueOf(answer));

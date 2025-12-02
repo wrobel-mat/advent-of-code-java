@@ -1,13 +1,13 @@
 package answer;
 
 class Answer {
-    private int part;
+    private int level;
     private String answer;
     private Status status;
 
-    static Answer forPart(int part) {
+    static Answer forLevel(int level) {
         Answer answ = new Answer();
-        answ.part = part;
+        answ.level = level;
         answ.status = Status.INCOMPLETE;
         return answ;
     }
@@ -31,6 +31,6 @@ class Answer {
 
     @Override
     public String toString() {
-        return String.format("{part: %d, answer: '%s', status: %s}", part, answer, status);
+        return String.format("{level: %d, answer: '%s', status: %s}", level, answer, status);
     }
 }

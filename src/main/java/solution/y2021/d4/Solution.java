@@ -8,14 +8,14 @@ import java.util.Optional;
 public class Solution implements ISolution {
 
     @Override
-    public Optional<String> solvePartOne(List<String> input) {
+    public Optional<String> solveLevelOne(List<String> input) {
         Bingo bingo = new Bingo(input);
         int answer = bingo.playUntilFirstWin();
         return Optional.of(String.valueOf(answer));
     }
 
     @Override
-    public Optional<String> solvePartTwo(List<String> input) {
+    public Optional<String> solveLevelTwo(List<String> input) {
         Bingo bingo = new Bingo(input);
         int answer = bingo.playAllBoards();
         return Optional.of(String.valueOf(answer));

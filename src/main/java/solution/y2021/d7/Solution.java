@@ -8,7 +8,7 @@ import java.util.Optional;
 public class Solution implements ISolution {
 
     @Override
-    public Optional<String> solvePartOne(List<String> input) {
+    public Optional<String> solveLevelOne(List<String> input) {
         CrabSwarm crabSwarm = new CrabSwarm(input.getFirst());
         CrabSubmarineFuelUsageCalculator fuelUsageCalculator = distance -> distance;
         CrabSwarmSimulator swarmSimulator = new CrabSwarmSimulator(fuelUsageCalculator);
@@ -17,7 +17,7 @@ public class Solution implements ISolution {
     }
 
     @Override
-    public Optional<String> solvePartTwo(List<String> input) {
+    public Optional<String> solveLevelTwo(List<String> input) {
         CrabSwarm crabSwarm = new CrabSwarm(input.getFirst());
         CrabSubmarineFuelUsageCalculator fuelUsageCalculator = distance -> distance * (distance + 1) / 2;
         CrabSwarmSimulator swarmSimulator = new CrabSwarmSimulator(fuelUsageCalculator);
