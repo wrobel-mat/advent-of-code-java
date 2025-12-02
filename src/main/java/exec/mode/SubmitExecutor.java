@@ -9,7 +9,6 @@ import solution.ISolution;
 import solution.SolutionProvider;
 
 import java.util.List;
-import java.util.Properties;
 
 public class SubmitExecutor implements IModeExecutor {
 
@@ -20,9 +19,8 @@ public class SubmitExecutor implements IModeExecutor {
 
     @Override
     public void run() {
-        final Properties props = Configuration.getProperties();
-        final int year = Integer.parseInt(props.getProperty("year"));
-        final int day = Integer.parseInt(props.getProperty("day"));
+        final int year = Configuration.getYear();
+        final int day = Configuration.getDay();
         final Result result = LocalCache.getResult(year, day);
         if (result.bothPartsCompleted()) {
             printResult(result);

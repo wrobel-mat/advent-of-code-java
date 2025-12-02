@@ -10,7 +10,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Properties;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
@@ -20,9 +19,8 @@ public class AocClient {
 
     public List<String> getInput(int year, int day) {
         try (HttpClient client = HttpClient.newHttpClient()) {
-            Properties props = Configuration.getProperties();
-            String sessionKey = props.getProperty("session.key");
-            String userAgent = props.getProperty("user.agent");
+            String sessionKey = Configuration.getSessionKey();
+            String userAgent = Configuration.getUserAgent();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(String.format("https://adventofcode.com/%d/day/%d/input", year, day)))
                     .header("Cookie", String.format("session=%s", sessionKey))
@@ -37,9 +35,8 @@ public class AocClient {
 
     public AocSubmitResult submitAnswer(int year, int day, int level, String answer) {
         try (HttpClient client = HttpClient.newHttpClient()) {
-            Properties props = Configuration.getProperties();
-            String sessionKey = props.getProperty("session.key");
-            String userAgent = props.getProperty("user.agent");
+            String sessionKey = Configuration.getSessionKey();
+            String userAgent = Configuration.getUserAgent();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(String.format("https://adventofcode.com/%d/day/%d/answer", year, day)))
                     .header("Cookie", String.format("session=%s", sessionKey))

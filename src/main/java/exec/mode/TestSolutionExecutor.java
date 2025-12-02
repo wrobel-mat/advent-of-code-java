@@ -7,7 +7,6 @@ import solution.ISolution;
 import solution.SolutionProvider;
 
 import java.util.List;
-import java.util.Properties;
 
 public class TestSolutionExecutor implements IModeExecutor {
 
@@ -18,9 +17,8 @@ public class TestSolutionExecutor implements IModeExecutor {
 
     @Override
     public void run() {
-        final Properties props = Configuration.getProperties();
-        final int year = Integer.parseInt(props.getProperty("year"));
-        final int day = Integer.parseInt(props.getProperty("day"));
+        final int year = Configuration.getYear();
+        final int day = Configuration.getDay();
 
         final List<String> input = LocalCache.getInput(year, day)
                 .orElseGet(() -> {
@@ -30,7 +28,13 @@ public class TestSolutionExecutor implements IModeExecutor {
                 });
 
         final ISolution solution = SolutionProvider.getSolution(year, day);
-        solution.solvePartOne(input).ifPresent(answer -> System.out.printf("Part 1 answer: %s%n", answer));
-        solution.solvePartTwo(input).ifPresent(answer -> System.out.printf("Part 2 answer: %s%n", answer));
+        solution.solvePartOne(input)
+                .ifPresentOrElse(
+                        answer -> System.out.printf("Part 1 answer: %s%n", answer),
+                        () -> System.out.println("No answer for part 1"));
+        solution.solvePartTwo(input)
+                .ifPresentOrElse(
+                        answer -> System.out.printf("Part 2 answer: %s%n", answer),
+                        () -> System.out.println("No answer for part 2"));
     }
 }

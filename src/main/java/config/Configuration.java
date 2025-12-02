@@ -11,7 +11,7 @@ public class Configuration {
     private Configuration() {
     }
 
-    public static Properties getProperties() {
+    private static Properties getProperties() {
         if (props != null) {
             return props;
         }
@@ -24,5 +24,21 @@ public class Configuration {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static int getYear() {
+        return Integer.parseInt(getProperties().getProperty("year"));
+    }
+
+    public static int getDay() {
+        return Integer.parseInt(getProperties().getProperty("day"));
+    }
+
+    public static String getSessionKey() {
+        return getProperties().getProperty("session.key");
+    }
+
+    public static String getUserAgent() {
+        return getProperties().getProperty("user.agent");
     }
 }
