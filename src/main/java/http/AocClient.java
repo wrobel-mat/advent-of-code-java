@@ -41,6 +41,7 @@ public class AocClient {
                     .uri(URI.create(String.format("https://adventofcode.com/%d/day/%d/answer", year, day)))
                     .header("Cookie", String.format("session=%s", sessionKey))
                     .header("User-Agent", userAgent)
+                    .header("Content-Type", "application/x-www-form-urlencoded")
                     .POST(HttpRequest.BodyPublishers.ofString(String.format("level=%d&answer=%s", level, answer)))
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
