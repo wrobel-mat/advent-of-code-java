@@ -11,7 +11,7 @@ public class SolutionProvider {
         try {
             return (ISolution) Class.forName(String.format("solution.y%d.d%d.Solution", year, day)).getConstructor().newInstance();
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(String.format("Day %d of year %d has not been initialized - rerun the application with `init` argument%n%s", day, year, e));
+            throw new RuntimeException(String.format("Year [%d] day [%d] is not initialized - rerun the application with `init` argument%n%s", year, day, e));
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                  NoSuchMethodException e) {
             throw new RuntimeException(e);

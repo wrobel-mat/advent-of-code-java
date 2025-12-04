@@ -5,10 +5,14 @@ import config.Configuration;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.logging.Logger;
 
+import static java.lang.String.format;
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 public class InitExecutor implements IModeExecutor {
+
+    private static final Logger LOG = Logger.getLogger(InitExecutor.class.getSimpleName());
 
     @Override
     public ApplicationMode mode() {
@@ -19,9 +23,9 @@ public class InitExecutor implements IModeExecutor {
     public void run() {
         final int year = Configuration.getYear();
         final int day = Configuration.getDay();
-        final Path solutionPath = Path.of("src", "main", "java", "solution", String.format("y%d", year), String.format("d%d", day), "Solution.java");
+        final Path solutionPath = Path.of("src", "main", "java", "solution", format("y%d", year), format("d%d", day), "Solution.java");
         if (Files.exists(solutionPath)) {
-            System.out.printf("Year: [%d] day: [%d] is already initialized%n", year, day);
+            LOG.info(format("Year [%d] day [%d] is already initialized", year, day));
             System.exit(0);
         }
         try {
@@ -32,9 +36,10 @@ public class InitExecutor implements IModeExecutor {
                     .replace("${dayNum}", String.valueOf(day));
             Files.createDirectories(solutionPath.getParent());
             Files.write(solutionPath, solutionTemplate.getBytes(), CREATE_NEW);
-            System.out.printf("Year: [%d] day: [%d] initialized successfully%n", year, day);
+            LOG.info(format("Year [%d] day [%d] initialized successfully", year, day));
+            LOG.info(format("Solution class created under path: %s", solutionPath));
         } catch (IOException e) {
-            System.out.printf("Year: [%d] day: [%d] initialization failed%n", year, day);
+            LOG.severe(format("Year [%d] day [%d] initialization failed", year, day));
             throw new RuntimeException(e);
         }
     }

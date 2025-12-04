@@ -1,8 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="submit-answer" type="Application" factoryName="Application">
+  <configuration default="false" name="submit-solution" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="exec.AdventOfCodeRunner" />
     <module name="advent-of-code-java" />
     <option name="PROGRAM_PARAMETERS" value="submit" />
+    <option name="VM_PARAMETERS" value="-Djava.util.logging.SimpleFormatter.format=&quot;[%1$tY-%1$tm-%1$tdT%1$tH:%1$tM:%1$tS.%1$tN %1$tZ] [%4$s] %3$s: %5$s%n%6$s&quot;" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

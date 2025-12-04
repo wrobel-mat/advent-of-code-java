@@ -41,6 +41,6 @@ public class Result {
 
     @Override
     public String toString() {
-        return String.format("year: %d, day: %d%n  answers: %s", year, day, answers.values());
+        return String.format("Year [%d], Day [%d], Answers %s", year, day, answers.values());
     }
 }
