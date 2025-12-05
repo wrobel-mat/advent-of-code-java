@@ -6,7 +6,7 @@ import config.Configuration;
 import http.AocClient;
 import http.AocSubmitResult;
 import solution.ISolution;
-import solution.SolutionProvider;
+import solution.SolutionFactory;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -45,7 +45,7 @@ public class SubmitExecutor implements IModeExecutor {
                     return fetchedInput;
                 });
 
-        final ISolution solution = SolutionProvider.getSolution(year, day);
+        final ISolution solution = SolutionFactory.getSolution(year, day);
         if (result.levelNotCompleted(1)) {
             long start1 = System.nanoTime();
             solution.solveLevelOne(input)

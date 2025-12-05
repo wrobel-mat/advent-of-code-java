@@ -4,7 +4,7 @@ import cache.LocalCache;
 import config.Configuration;
 import http.AocClient;
 import solution.ISolution;
-import solution.SolutionProvider;
+import solution.SolutionFactory;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -35,7 +35,7 @@ public class TestSolutionExecutor implements IModeExecutor {
                     return fetchedInput;
                 });
 
-        final ISolution solution = SolutionProvider.getSolution(year, day);
+        final ISolution solution = SolutionFactory.getSolution(year, day);
         long start1 = System.nanoTime();
         solution.solveLevelOne(input)
                 .ifPresentOrElse(
