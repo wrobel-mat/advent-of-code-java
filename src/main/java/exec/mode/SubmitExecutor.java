@@ -37,6 +37,8 @@ public class SubmitExecutor implements IModeExecutor {
             System.exit(0);
         }
 
+        final ISolution solution = SolutionFactory.getSolution(year, day);
+
         final AocClient aocClient = new AocClient();
         final List<String> input = LocalCache.getInput(year, day)
                 .orElseGet(() -> {
@@ -45,7 +47,6 @@ public class SubmitExecutor implements IModeExecutor {
                     return fetchedInput;
                 });
 
-        final ISolution solution = SolutionFactory.getSolution(year, day);
         if (result.levelNotCompleted(1)) {
             long start1 = System.nanoTime();
             solution.solveLevelOne(input)

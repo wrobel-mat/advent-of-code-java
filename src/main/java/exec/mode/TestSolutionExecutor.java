@@ -28,6 +28,8 @@ public class TestSolutionExecutor implements IModeExecutor {
 
         LOG.info(format("Testing solution for year [%d] day [%d]", year, day));
 
+        final ISolution solution = SolutionFactory.getSolution(year, day);
+
         final List<String> input = LocalCache.getInput(year, day)
                 .orElseGet(() -> {
                     List<String> fetchedInput = new AocClient().getInput(year, day);
@@ -35,7 +37,6 @@ public class TestSolutionExecutor implements IModeExecutor {
                     return fetchedInput;
                 });
 
-        final ISolution solution = SolutionFactory.getSolution(year, day);
         long start1 = System.nanoTime();
         solution.solveLevelOne(input)
                 .ifPresentOrElse(
