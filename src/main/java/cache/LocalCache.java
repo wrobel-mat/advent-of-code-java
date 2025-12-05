@@ -39,7 +39,7 @@ public class LocalCache {
         Path inputPath = Path.of("src", "main", "resources", "inputs", String.valueOf(year), format("day%d.txt", day));
         try {
             if (Files.notExists(inputPath.getParent())) {
-                Files.createDirectory(inputPath.getParent());
+                Files.createDirectories(inputPath.getParent());
             }
             Files.write(inputPath, input);
             LOG.info(format("Cached puzzle input for year [%d] day [%d] under path: %s", year, day, inputPath));
@@ -69,7 +69,7 @@ public class LocalCache {
         Path resultPath = Path.of("src", "main", "resources", "results", String.valueOf(year), format("day%d.json", day));
         try {
             if (Files.notExists(resultPath.getParent())) {
-                Files.createDirectory(resultPath.getParent());
+                Files.createDirectories(resultPath.getParent());
             }
             Files.write(resultPath, RESULT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsBytes(result));
             LOG.info(format("Saved puzzle result for year [%d] day [%d] under path: %s", year, day, resultPath));
