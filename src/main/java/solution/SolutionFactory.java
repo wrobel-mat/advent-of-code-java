@@ -16,11 +16,10 @@ public class SolutionFactory {
     private SolutionFactory() {
     }
 
-    public static boolean initializeSolution(int year, int day) {
+    public static void initializeSolution(int year, int day) {
         final Path solutionPath = Path.of("src", "main", "java", "solution", format("y%d", year), format("d%d", day), "Solution.java");
         if (Files.exists(solutionPath)) {
             LOG.info(format("Year [%d] day [%d] is already initialized", year, day));
-            return false;
         }
         try {
             final Path templatePath = Path.of("src", "main", "resources", "templates", "Solution.java");
@@ -32,7 +31,6 @@ public class SolutionFactory {
             Files.write(solutionPath, solutionTemplate.getBytes(), CREATE_NEW);
             LOG.info(format("Year [%d] day [%d] initialized successfully", year, day));
             LOG.info(format("Solution class created under path: %s", solutionPath));
-            return true;
         } catch (IOException e) {
             LOG.severe(format("Year [%d] day [%d] initialization failed", year, day));
             throw new RuntimeException(e);

@@ -23,6 +23,10 @@ public class LocalCache {
         RESULT_MAPPER.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
     }
 
+    public static boolean inputIsCached(int year, int day) {
+        return Files.exists(Path.of("src", "main", "resources", "inputs", String.valueOf(year), format("day%d.txt", day)));
+    }
+
     public static Optional<List<String>> getInput(int year, int day) {
         Path inputPath = Path.of("src", "main", "resources", "inputs", String.valueOf(year), format("day%d.txt", day));
         if (Files.exists(inputPath)) {

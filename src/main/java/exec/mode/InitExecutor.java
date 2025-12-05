@@ -18,8 +18,8 @@ public class InitExecutor implements IModeExecutor {
     public void run() {
         final int year = Configuration.getYear();
         final int day = Configuration.getDay();
-        boolean initialized = SolutionFactory.initializeSolution(year, day);
-        if (initialized) {
+        SolutionFactory.initializeSolution(year, day);
+        if (!LocalCache.inputIsCached(year, day)) {
             List<String> fetchedInput = new AocClient().getInput(year, day);
             LocalCache.persistInput(year, day, fetchedInput);
         }
