@@ -2,6 +2,6 @@ package exec.mode;
 
 
 public interface IModeExecutor {
-    ApplicationMode mode();
+    ExecutionMode mode();
     void run();
 }

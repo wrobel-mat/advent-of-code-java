@@ -10,8 +10,8 @@ import java.util.List;
 public class InitExecutor implements IModeExecutor {
 
     @Override
-    public ApplicationMode mode() {
-        return ApplicationMode.INIT;
+    public ExecutionMode mode() {
+        return ExecutionMode.INIT;
     }
 
     @Override

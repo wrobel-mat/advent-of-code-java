@@ -17,8 +17,8 @@ public class TestSolutionExecutor implements IModeExecutor {
     private static final Logger LOG = Logger.getLogger(TestSolutionExecutor.class.getSimpleName());
 
     @Override
-    public ApplicationMode mode() {
-        return ApplicationMode.TEST;
+    public ExecutionMode mode() {
+        return ExecutionMode.TEST;
     }
 
     @Override

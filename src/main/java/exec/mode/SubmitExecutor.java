@@ -19,8 +19,8 @@ public class SubmitExecutor implements IModeExecutor {
     private static final Logger LOG = Logger.getLogger(SubmitExecutor.class.getSimpleName());
 
     @Override
-    public ApplicationMode mode() {
-        return ApplicationMode.SUBMIT;
+    public ExecutionMode mode() {
+        return ExecutionMode.SUBMIT;
     }
 
     @Override
