@@ -9,6 +9,7 @@ import solution.ISolution;
 import solution.SolutionProvider;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import static java.lang.String.format;
@@ -46,8 +47,13 @@ public class SubmitExecutor implements IModeExecutor {
 
         final ISolution solution = SolutionProvider.getSolution(year, day);
         if (result.levelNotCompleted(1)) {
+            long start1 = System.nanoTime();
             solution.solveLevelOne(input)
-                    .map(answer -> aocClient.submitAnswer(year, day, 1, answer))
+                    .map(answer -> {
+                        long end1 = System.nanoTime();
+                        LOG.info(format("Level 1 execution time: %d ms", TimeUnit.NANOSECONDS.toMillis(end1 - start1)));
+                        return aocClient.submitAnswer(year, day, 1, answer);
+                    })
                     .filter(AocSubmitResult::isCorrectAnswer)
                     .ifPresent(submitResult -> {
                         result.completeLevel(1, submitResult.submittedAnswer());
@@ -55,8 +61,13 @@ public class SubmitExecutor implements IModeExecutor {
                     });
         }
         if (result.levelNotCompleted(2)) {
+            long start2 = System.nanoTime();
             solution.solveLevelTwo(input)
-                    .map(answer -> aocClient.submitAnswer(year, day, 2, answer))
+                    .map(answer -> {
+                        long end2 = System.nanoTime();
+                        LOG.info(format("Level 2 execution time: %d ms", TimeUnit.NANOSECONDS.toMillis(end2 - start2)));
+                        return aocClient.submitAnswer(year, day, 2, answer);
+                    })
                     .filter(AocSubmitResult::isCorrectAnswer)
                     .ifPresent(submitResult -> {
                         result.completeLevel(2, submitResult.submittedAnswer());
