@@ -20,6 +20,7 @@ public class SolutionFactory {
         final Path solutionPath = Path.of("src", "main", "java", "solution", format("y%d", year), format("d%d", day), "Solution.java");
         if (Files.exists(solutionPath)) {
             LOG.info(format("Year [%d] day [%d] is already initialized", year, day));
+            return;
         }
         try {
             final Path templatePath = Path.of("src", "main", "resources", "templates", "Solution.java");
