@@ -9,6 +9,7 @@ module advent.of.code.java {
     requires org.jsoup;
     requires java.logging;
     requires java.net.http;
+    requires java.desktop;
     provides IModeExecutor with InitExecutor,
             SubmitExecutor,
             TestSolutionExecutor;
