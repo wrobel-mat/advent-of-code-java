@@ -27,7 +27,7 @@ public class SolutionFactory {
             String solutionTemplate = new String(Files.readAllBytes(templatePath));
             solutionTemplate = solutionTemplate
                     .replace("${yearNum}", String.valueOf(year))
-                    .replace("${dayNum}", String.valueOf(day));
+                    .replace("${dayNum}", String.format("%02d", day));
             Files.createDirectories(solutionPath.getParent());
             Files.write(solutionPath, solutionTemplate.getBytes(), CREATE_NEW);
             LOG.info(format("Year [%d] day [%d] initialized successfully", year, day));
